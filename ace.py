@@ -114,7 +114,7 @@ class ConceptDiscovery(object):
     concept_dir = os.path.join(self.source_dir, concept)
     img_paths = [
         os.path.join(concept_dir, d)
-        for d in tf.gfile.ListDirectory(concept_dir)
+        for d in tf.io.gfile.listdir(concept_dir)
     ]
     return load_images_from_files(
         img_paths,
@@ -468,10 +468,10 @@ class ConceptDiscovery(object):
     """
     rnd_acts_path = os.path.join(self.activation_dir, 'acts_{}_{}'.format(
         random_concept, bottleneck))
-    if not tf.gfile.Exists(rnd_acts_path):
+    if not tf.io.gfile.exists(rnd_acts_path):
       rnd_imgs = self.load_concept_imgs(random_concept, self.max_imgs)
       acts = get_acts_from_images(rnd_imgs, self.model, bottleneck)
-      with tf.gfile.Open(rnd_acts_path, 'w') as f:
+      with tf.io.gfile.GFile(rnd_acts_path, 'w') as f:
         np.save(f, acts, allow_pickle=False)
       del acts
       del rnd_imgs

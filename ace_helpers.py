@@ -35,7 +35,7 @@ def make_model(sess, model_to_run, model_path,
         sess, model_saved_path=model_path, labels_path=labels_path)
   elif model_to_run == 'GoogleNet':
     # common_typos_disable
-    mymodel = model.GoolgeNetWrapper_public(
+    mymodel = model.GoogleNetWrapper_public(
         sess, model_saved_path=model_path, labels_path=labels_path)
   else:
     raise ValueError('Invalid model name')
@@ -54,7 +54,7 @@ def load_image_from_file(filename, shape):
   Rasies:
     exception if the image was not the right shape.
   """
-  if not tf.gfile.Exists(filename):
+  if not tf.io.gfile.exists(filename):
     tf.logging.error('Cannot find file: {}'.format(filename))
     return None
   try:
@@ -312,7 +312,7 @@ def plot_concepts(cd, bn, num=10, address=None, mode='diverse', concepts=None):
       fig.add_subplot(ax)
   plt.suptitle(bn)
   if address is not None:
-    with tf.gfile.Open(address + bn + '.png', 'w') as f:
+    with tf.io.gfile.GFile(address + bn + '.png', 'w') as f:
       fig.savefig(f)
     plt.clf()
     plt.close(fig)
@@ -413,7 +413,7 @@ def save_ace_report(cd, accs, scores, address):
     for concept in cd.dic[bn]['concepts']:
       report += '\n' + bn + ':' + concept + ':' + str(
           np.mean(accs[bn][concept]))
-  with tf.gfile.Open(address, 'w') as f:
+  with tf.io.gfile.GFile(address, 'w') as f:
     f.write(report)
   report = '\n\n\t\t\t ---TCAV scores---'
   for bn in cd.bottlenecks:
@@ -423,7 +423,7 @@ def save_ace_report(cd, accs, scores, address):
           scores[bn][concept], scores[bn][cd.random_concept])
       report += '\n{}:{}:{},{}'.format(bn, concept,
                                        np.mean(scores[bn][concept]), pvalue)
-  with tf.gfile.Open(address, 'w') as f:
+  with tf.io.gfile.GFile(address, 'w') as f:
     f.write(report)
 
 
@@ -442,8 +442,8 @@ def save_concepts(cd, concepts_dir):
           np.uint8)
       images = (np.clip(cd.dic[bn][concept]['images'], 0, 1) * 256).astype(
           np.uint8)
-      tf.gfile.MakeDirs(patches_dir)
-      tf.gfile.MakeDirs(images_dir)
+      tf.io.gfile.makedirs(patches_dir)
+      tf.io.gfile.makedirs(images_dir)
       image_numbers = cd.dic[bn][concept]['image_numbers']
       image_addresses, patch_addresses = [], []
       for i in range(len(images)):
@@ -471,6 +471,6 @@ def save_images(addresses, images):
     addresses = image_addresses
   assert len(addresses) == len(images), 'Invalid number of addresses'
   for address, image in zip(addresses, images):
-    with tf.gfile.Open(address, 'w') as f:
+    with tf.io.gfile.GFile(address, 'w') as f:
       Image.fromarray(image).save(f, format='PNG')
 
