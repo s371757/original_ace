@@ -1,0 +1,9 @@
+circle
+heptagon
+hexagon
+nonagon
+octagon
+pentagon
+square
+star
+triangle

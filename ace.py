@@ -586,8 +586,11 @@ class ConceptDiscovery(object):
     """
     if directory is None:
       directory = self.cav_dir
-    params = tf.contrib.training.HParams(model_type='linear', alpha=.01)
-    cav_key = cav.CAV.cav_key([c, r], bn, params.model_type, params.alpha)
+    params = {
+      'model_type': 'linear',
+      'alpha':.01,
+    }
+    cav_key = cav.CAV.cav_key([c, r], bn, params['model_type'], params['alpha'])
     cav_path = os.path.join(self.cav_dir, cav_key.replace('/', '.') + '.pkl')
     vector = cav.CAV.load_cav(cav_path).cavs[0]
     return np.expand_dims(vector, 0) / np.linalg.norm(vector, ord=2)
@@ -619,7 +622,7 @@ class ConceptDiscovery(object):
       bn_grads = np.zeros((acts.shape[0], np.prod(acts.shape[1:])))
       for i in range(len(acts)):
         bn_grads[i] = self.model.get_gradient(
-            acts[i:i+1], [class_id], bn).reshape(-1)
+            acts[i:i+1], [class_id], bn, images[0]).reshape(-1)
       gradients[bn] = bn_grads
     return gradients
 

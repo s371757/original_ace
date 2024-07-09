@@ -107,3 +107,11 @@ venv.bak/
 /imagenet/
 
 
+/results/
+
+dataset/
+/shapes_results/
+/shapes_results2/
+/simple_banded_dataset/
+/shapes_dataset/
+/imagenet/

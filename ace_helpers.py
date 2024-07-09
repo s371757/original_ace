@@ -13,6 +13,9 @@ from sklearn import linear_model
 from sklearn.model_selection import cross_val_score
 import tensorflow as tf
 
+from banded_dataset_helpers.custom_model_wrapper import Shapes_Classifier_Wrapper
+
+
 def make_model(sess, model_to_run, model_path, 
                labels_path, randomize=False,):
   """Make an instance of a model.
@@ -35,6 +38,16 @@ def make_model(sess, model_to_run, model_path,
         sess, model_saved_path=model_path, labels_path=labels_path)
   elif model_to_run == 'GoogleNet':
     # common_typos_disable
+    mymodel = model.GoogleNetWrapper_public(
+        sess, model_saved_path=model_path, labels_path=labels_path)
+  elif model_to_run == 'ResNet50':
+    mymodel = model.ResNet50Wrapper_public(
+        sess, model_saved_path=model_path, labels_path=labels_path)
+  elif model_to_run == 'Shapes_Classifier':
+    labels = open(labels_path).read().splitlines()
+    mymodel = Shapes_Classifier_Wrapper(
+      model_path=model_path, labels=labels)
+  elif model_to_run == 'Simple_Banded_CNN':
     mymodel = model.GoogleNetWrapper_public(
         sess, model_saved_path=model_path, labels_path=labels_path)
   else:
