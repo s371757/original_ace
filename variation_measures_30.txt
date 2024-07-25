@@ -1,0 +1,15 @@
+anchor_concept10: mean_variance=641.3238, std_deviation=539.0274
+anchor_concept13: mean_variance=586.5499, std_deviation=486.3779
+anchor_concept12: mean_variance=329.9350, std_deviation=277.4039
+anchor_concept5: mean_variance=463.2899, std_deviation=385.8043
+anchor_concept1: mean_variance=620.2904, std_deviation=498.4150
+anchor_concept11: mean_variance=496.2926, std_deviation=384.2076
+anchor_concept15: mean_variance=772.8191, std_deviation=618.1539
+anchor_concept14: mean_variance=374.0608, std_deviation=381.0859
+anchor_concept2: mean_variance=491.5080, std_deviation=414.6908
+anchor_concept6: mean_variance=514.4231, std_deviation=430.0598
+anchor_concept8: mean_variance=757.2558, std_deviation=662.8199
+anchor_concept7: mean_variance=661.6347, std_deviation=540.0790
+anchor_concept9: mean_variance=586.7293, std_deviation=472.8319
+anchor_concept3: mean_variance=597.6285, std_deviation=477.0380
+anchor_concept4: mean_variance=819.1097, std_deviation=671.1096

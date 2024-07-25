@@ -454,6 +454,13 @@ class ConceptDiscovery(object):
       bn_dic.pop('cost', None)
       self.dic[bn] = bn_dic
 
+  def save_activation_vectors(activation_vectors, save_dir, concept_name):
+    """Save activation vectors to the specified directory."""
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    save_path = os.path.join(save_dir, f'acts_{concept_name}.npy')
+    np.save(save_path, activation_vectors)
+
   def _random_concept_activations(self, bottleneck, random_concept):
     """Wrapper for computing or loading activations of random concepts.
 
@@ -470,7 +477,7 @@ class ConceptDiscovery(object):
         random_concept, bottleneck))
     if not tf.io.gfile.exists(rnd_acts_path):
       rnd_imgs = self.load_concept_imgs(random_concept, self.max_imgs)
-      acts = get_acts_from_images(rnd_imgs, self.model, bottleneck)
+      acts = get_acts_from_images(rnd_imgs, self.model, bottleneck, save_activations=True, name=random_concept)
       with tf.io.gfile.GFile(rnd_acts_path, 'w') as f:
         np.save(f, acts, allow_pickle=False)
       del acts
@@ -557,7 +564,7 @@ class ConceptDiscovery(object):
       for concept in self.dic[bn]['concepts']:
         concept_imgs = self.dic[bn][concept]['images']
         concept_acts = get_acts_from_images(
-            concept_imgs, self.model, bn)
+            concept_imgs, self.model, bn, save_activations=True, name=concept)
         acc[bn][concept] = self._concept_cavs(bn, concept, concept_acts, ow=ow)
         if np.mean(acc[bn][concept]) < min_acc:
           concepts_to_delete.append((bn, concept))

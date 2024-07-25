@@ -1,0 +1,16 @@
+anchor_concept10: 0.2238
+anchor_concept13: 0.2558
+anchor_concept12: 0.2658
+anchor_concept5: 0.2842
+anchor_concept2: 0.2871
+anchor_concept1: 0.2652
+anchor_concept11: 0.2914
+anchor_concept15: 0.2162
+anchor_concept14: 0.2251
+anchor_concept16: 0.2404
+anchor_concept7: 0.2236
+anchor_concept8: 0.2312
+anchor_concept9: 0.2841
+anchor_concept6: 0.2762
+anchor_concept4: 0.2115
+anchor_concept3: 0.2790

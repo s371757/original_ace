@@ -133,16 +133,30 @@ def load_images_from_files(filenames, max_imgs=500, return_filenames=False,
     return np.array(imgs)
 
 
-def get_acts_from_images(imgs, model, bottleneck_name):
-  """Run images in the model to get the activations.
-  Args:
-    imgs: a list of images
-    model: a model instance
-    bottleneck_name: bottleneck name to get the activation from
-  Returns:
-    numpy array of activations.
-  """
-  return np.asarray(model.run_examples(imgs, bottleneck_name)).squeeze()
+def get_acts_from_images(imgs, model, bottleneck_name, save_activations=False, name=None):
+    """Run images in the model to get the activations and optionally save them.
+
+    Args:
+        imgs: a list of images
+        model: a model instance
+        bottleneck_name: bottleneck name to get the activation from
+        save_activations: a boolean indicating whether to save the activations
+        name: name to use for saving activations (used if save_activations is True)
+
+    Returns:
+        numpy array of activations.
+    """
+    print(name)
+    activations = np.asarray(model.run_examples(imgs, bottleneck_name)).squeeze()
+
+    if save_activations and name is not None:
+        save_dir = os.path.join('experiments_on_cavs', 'acts')
+        os.makedirs(save_dir, exist_ok=True)
+        save_path = os.path.join(save_dir, f'{name}.npy')
+        with open(save_path, 'wb') as f:
+            np.save(f, activations, allow_pickle=False)
+
+    return activations
 
 
 def flat_profile(cd, images, bottlenecks=None):
