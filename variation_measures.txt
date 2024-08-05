@@ -1,9 +1,9 @@
-anchor_concept10: mean_variance=2638.3076, std_deviation=2185.1789
 anchor_concept13: mean_variance=3007.4054, std_deviation=2521.5388
+anchor_concept10: mean_variance=2638.3076, std_deviation=2185.1789
 anchor_concept12: mean_variance=2163.4986, std_deviation=1765.8557
-anchor_concept5: mean_variance=2749.9649, std_deviation=2166.6959
 anchor_concept2: mean_variance=2773.3153, std_deviation=2106.8526
 anchor_concept1: mean_variance=2424.5510, std_deviation=1906.9619
+anchor_concept5: mean_variance=2749.9649, std_deviation=2166.6959
 anchor_concept11: mean_variance=3464.6332, std_deviation=2776.1304
 anchor_concept15: mean_variance=2128.3726, std_deviation=1867.9932
 anchor_concept14: mean_variance=2844.6607, std_deviation=2467.3681
